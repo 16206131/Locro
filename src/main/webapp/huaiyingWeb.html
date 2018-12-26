@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>淮阴师范学院</title>
+    <script type="text/javascript" src="/js/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.lazyload.js"></script>
+    <script type="text/javascript" src="/js/raphael-min.js"></script>
+    <script type="text/javascript" src="/js/jquery.easing.js"></script>
+    <script type="text/javascript" src="/js/iview.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("ul.subnav").parent().append("<span></span>");
+            $("ul.menu_body li span").mouseover(function() {
+                $(this).parent().find("ul.subnav").slideDown('fast').show();
+                $(this).parent().mouseleave(function() {
+                }, function(){
+                    $(this).parent().find("ul.subnav").slideUp('slow');
+                });
+            }).hover(function() {
+                $(this).addClass("subhover");
+            }, function(){
+                $(this).removeClass("subhover");
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function(){
+            //焦点图
+            $("img").lazyload({threshold:500});
+            $('#iview2').iView({
+                pauseTime: 8000,
+                pauseOnHover: true,//悬停中止滚动
+                directionNav: true,//是否展现上下按钮
+                directionNavHide: true,
+                directionNavHoverOpacity: 0,//去掉此属性，初始显示上下按钮
+                controlNav: true,//展示图片数量圆点
+                captionOpacity:0.4,  //Caption opacity
+                captionOpacityText: 1,  //Caption Text opacity
+                controlNavNextPrev: false,
+                controlNavTooltip: false,
+                nextLabel: "下一张",
+                previousLabel: "上一张",
+                playLabel: "",
+                pauseLabel: "",
+                timer: "",
+                timerPadding: 0,//时间圈的边距
+                timerDiameter: 0,//时间圈的大小
+                timerColor: "#fff"
+            });
+            //焦点图end
+        });
+    </script>
+
+    <style type="text/css">
+        *{margin:0px;padding:0px;}
+        a{text-decoration:none;}
+        a img{border:0px;}
+        ul,li{list-style:none;}
+        body{font-size:14px; font-family:"微软雅黑","宋体";color:#5d5d5d;}
+        a:link{color:#666;text-decoration:none;}
+        a:hover{color:#1f69b8;}
+        .fll{float:left;}
+        .flr{float:right;}
+        .clear{clear:both;}
+        .w_full{width:100%;}
+        .w_980{width:980px;margin:0 auto;}
+
+        #top a {font-size:14px; margin-right:15px; color:#666;text-shadow:#fff 1px 1px 1px;}
+        #top a:hover {text-decoration:none; color:#1f69b8;}
+        #top {background:url(/img/top_bg.png) repeat-x; height:45px; line-height:45px;}
+
+        #banner {height:119px;}
+        #logo {margin-top:25px; margin-left:15px;}
+        #stxt {float:left;}
+        #sbtn {float:left;}
+        #keyboard {width:155px; height:39px; background:url(/img/srchbox_bg.png) no-repeat; border:none; margin-top:40px; padding-left:10px; font-size:12px; color:#999; line-height:39px;}
+        #submit {width:46px; height:39px; background:url(/img/srchbtn_bg.png) no-repeat; border:none;margin-top:40px; margin-right:25px;_margin-top:41px; cursor:pointer;}
+
+        #menu {background:#94bbe4; height:55px; line-height:55px;}
+        #menu_body {background:#3b7abd; font-size:16px; position:absolute; z-index:9997; margin:0 auto;}
+        #menu_body a {color:#fff; width:122px;height:55px; display:block;}
+        #menu_body li {float:left; width:122px;background:#3b7abd; text-align:center; position:relative; cursor:pointer;}
+        #menu_body li:hover{background:#1f69b8;}
+        #menu_body #more {width:122px; height:55px; background:url(/img/d_arrow.gif) 100px 27px no-repeat; position:absolute; left:0; top:0;}
+
+        .subnav {position: absolute;left:0;top:55px;display:none;width:122px;-moz-border-radius-bottomleft:5px;-moz-border-radius-bottomright:5px;-webkit-border-bottom-left-radius: 5px;-webkit-border-bottom-right-radius:5px;filter:alpha(opacity=80);-moz-opacity:0.8;-khtml-opacity: 0.8;opacity: 0.8;}
+        .subnav {font-size:14px;background:#3b7abd; padding-bottom:10px; padding-top:10px; z-index:100;}
+        .subnav li {line-height:48px; height:48px; z-index:100;}
+
+        .main_wrap {background:url(/img/body_bg.jpg);padding-top:20px; z-index:1; padding-bottom:20px;}
+
+        /**************焦点图***************/
+        .f_pic {height: 390px; z-index:1; position:absolute;}
+        .iviewSlider{overflow: hidden;}
+        /* The timer in the Slider */
+        #iview-timer{position: absolute;z-index: 10;border-radius: 5px;cursor: pointer;}
+        #iview-timer div{border-radius: 3px;}
+        /* The Preloader in the Slider */
+        #iview-preloader{position: absolute;z-index: 20;-webkit-border-radius: 3px;-moz-border-radius: 3px;border-radius: 3px;border: #000 1px solid;	padding: 1px;width: 100px;height: 3px;}
+        #iview-preloader div{float: left;-webkit-border-radius: 2px;-moz-border-radius: 2px;border-radius: 2px;height: 3px;background: #000;width: 0px;}
+        /* The strips and boxes in the Slider */
+        .iview-strip{display: block;position: absolute;z-index: 5;}
+        .iview-block{display: block;position: absolute;z-index: 5;}
+        /* Direction nav styles (e.g. Next & Prev) */
+        .iview-directionNav a{position: absolute;top: 45%;z-index: 9;cursor: pointer;}
+        .iview-prevNav{left: 0px;}
+        .iview-nextNav{right: 0px;}
+        /* Control nav styles (e.g. 1,2,3...) */
+        .iview-controlNav{position: absolute;z-index: 9;}
+        .iview-controlNav a{z-index: 9;cursor: pointer;}
+        .iview-controlNav a.active{font-weight: bold;}
+        .iview-controlNav .iview-items ul{list-style: none;}
+        .iview-controlNav .iview-items ul li{display: inline;position: relative;}
+        .iview-controlNav .iview-tooltip{position: absolute;}
+        /* The captions in the Slider */
+        .caption-contain{color: #fff;font-size: 16px;}
+        /**个性化**/
+        #iview2{width: 980px;height: 390px;background: #fff;position:relative;	overflow: hidden; z-index:1;}
+        #iview2 a:hover {text-decoration:none;}
+        .iviewdis{display:none;}
+        #iview2 .iviewSlider{display: block;width:980px;height:390px;overflow: hidden;border-radius: 3px;}
+        #iview2 .iviewSlider a{display:block;}
+        #iview2 div.iview-directionNav a{display: block;cursor: pointer;position: absolute;width: 27px;height: 27px;text-indent: -9999px;-webkit-transition: left 0.3s ease-in-out;-webkit-transition-property: left, right;-moz-transition: left 0.3s ease-in-out;-moz-transition-property: left, right;-o-transition: left 0.3s ease-in-out;-o-transition-property: left, right;-ms-transition: left 0.3s ease-in-out;-ms-transition-property: left, right;transition: left 0.3s ease-in-out;transition-property: left, right;background-image: url(/img/bg_direction_nav_white.png);_filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=scale, src='/img/bg_direction_nav_white.png');_background: none;}
+        #iview2 div.iview-directionNav a.iview-nextNav{right: -27px;}
+        #iview2 div.iview-directionNav a.iview-prevNav{left: -27px;background-image: url(/img/bg_direction_nav_white1.png);_filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=scale, src='/img/bg_direction_nav_white1.png');_background: none;}
+        #iview2.iview-hover div.iview-directionNav a.iview-nextNav{right: 20px;}
+        #iview2.iview-hover div.iview-directionNav a.iview-prevNav{left: 20px;}
+        /*******显示目前张数的圆点*********/
+        #iview2 .iview-controlNav{position: absolute;bottom: 48px;right: 25px;}
+        #iview2 .iview-controlNav a{text-indent: -9999px;}
+        #iview2 .iview-controlNav a.iview-control{padding: 0px;float: left;width: 15px;	height: 15px;line-height: 0px;margin-right: 7px;margin-top: 10px;cursor: pointer;border-radius: 5px;-moz-box-shadow: 1px 1px 1px #A9A9A9 inset;-webkit-box-shadow: 1px 1px 1px darkGray inset;box-shadow: 1px 1px 1px darkGray inset;background: lightGrey;}
+        #iview2 .iview-controlNav a.iview-control.active{background-color: #0066cc;-moz-box-shadow: 1px 1px 1px #0066cc inset;-webkit-box-shadow: 1px 1px 1px #0066cc inset;box-shadow: 1px 1px 1px #0066cc inset;background: #0066cc;text-decoration:none;}
+        .iview-caption{background: url('/img/caption-bg.png');border-radius:5px;	padding:0px 0px 40px 0px;text-shadow: #000 1px 1px 0px;width:600px;position: absolute;z-index: 4;overflow: hidden;}
+        .caption-contain{z-index:5;color: #fff;  font-size:18px; margin-left:30px; margin-top:8px; letter-spacing:1px;}
+        #iview-preloader{border: #94bbe4 1px solid;width: 250px; height:10px;}
+        #iview-preloader div{background: #94bbe4;height:10px;}
+        /**************焦点图 end***************/
+
+        #con_box {background:#fff;margin-top:20px; border-radius:5px;}
+        #con_box a:hover {text-decoration:none;}
+
+        .n_title {font-size:20px;border-bottom:#e9e9e9 solid 1px; padding-bottom:15px; position:relative;}
+        .n_title a{color:#003164;}
+        .n_title span {position:absolute; right:0;top:8px; font-size:12px; display:block; width:32px; background:url(/img/r_dot.png) 27px 5px no-repeat;}
+        .n_title span a{color:#666;display:block;}
+        .n_title span a:hover{color:#003164;}
+        .n_title span:hover {background:url(/img/r_dot_over.png) 27px 5px no-repeat;color:#003164;}
+        .r_content {padding-bottom:6px;_padding-bottom:2px; margin-top:8px; display:block;}
+        .date_box {background:url(/img/d_bg.png) no-repeat; width:50px; height:51px; overflow:hidden; float:left; margin-top:5px;}
+        .date_box #m {color:#fff; text-align:center; line-height:20px; height:24px;}
+        .date_box #d {color:#000; text-align:center;font-size:18px; line-height:26px; height:28px;}
+        .r_li {width:190px; margin-left:15px; float:left;}
+        .r_li #t {font-size:14px; line-height:18px; margin-top:2px;}
+        .r_li #t a{color:#033363;}
+        .r_li #t a:hover{color:#F00;}
+        .r_li #p {margin-top:10px;background:url(/img/p_bg.png) 0px 2px no-repeat; text-indent:20px; font-size:12px;}
+        .r_li #d {margin-top:8px;background:url(/img/t_bg.png) 1px 2px no-repeat; text-indent:20px; font-size:12px;}
+        .r_li #b {margin-top:8px;background:url(/img/b_bg.png) 1px 2px no-repeat; text-indent:20px; font-size:12px;}
+
+        #c_center .tabCons {margin-top:6px;}
+        #c_center .n_title span {_right:30px;}
+
+
+        .news_box {margin-top:15px;}
+        .news_box dt {font-size:14px; line-height:20px; background:url(/img/gray_dot.png) 0px 7px no-repeat; text-indent:16px; white-space:nowrap; overflow:hidden;width:345px;}
+        .news_box a {color:#033363;}
+        .news_box a:hover {color:#F00;}
+        .news_box dd { margin-top:10px; font-size:12px; color:#666; line-height:20px;}
+        .news_box dd a {color:#003164;}
+
+        .hdtz_title {height:26px;_height:29px;border-bottom:#e9e9e9 solid 1px; padding-bottom:15px; margin-bottom:13px; position:relative; z-index:0;}
+        .hdtz_title span {position:absolute; right:0;top:8px; font-size:12px; display:block; width:32px; background:url(/img/r_dot.png) 27px 5px no-repeat;}
+        .hdtz_title span a{color:#666;display:block;}
+        .hdtz_title span a:hover{color:#003164;}
+        .tabMenus{margin:0 auto;overflow:hidden; position:absolute; font-size:16px; top:25px; left:5px;_left:1px;}
+        .tabMenus li{background:#F0F2F3; border:1px solid #E6E9EA; border-radius:5px; margin:0 6px; display:block; cursor:pointer; float:left; padding:5px 10px 5px 10px;_padding:7px 10px 5px 10px;}
+        .tabMenus li.current{background:#3b7abd; border:1px solid #66a3e0; color:#fff;}
+        .tabCons{clear:both;margin:0 auto; overflow:hidden;height:220px;}
+        .tab_con{display:none;}
+        #jzyg_dot {margin-left:0px;}
+        #ann_list {line-height:35px;}
+        #ann_list li{background:url(/img/gray_dot.png) 0px 15px no-repeat; text-indent:16px; white-space:nowrap; list-style:outside none; overflow:hidden;width:257px;}
+        #ann_list a {color:#033363;}
+        #ann_list a:hover {color:#ff0000;}
+
+        #zhxw {padding-bottom:41px;}
+        #zhxw_dot {margin-left:31px;}
+
+        #c_left {width:210px; padding-top:30px;padding-bottom:15px; padding-left:40px;float:left; overflow:hidden;}
+        #c_center {width:348px; padding:30px; padding-left:42px;padding-bottom:15px;float:left; position:relative;}
+        #c_right {width:260px; padding:30px; padding-bottom:15px;float:left; position:relative; padding-left:10px;padding-right:0px;}
+
+        .m_box {margin-top:20px; border-bottom:#e9e9e9 solid 1px; padding-bottom:15px;}
+        .m_box a {color:#033363;}
+        .m_box a:hover {color:#F00;}
+        .m_box dd {font-size:14px; margin-top:5px; line-height:20px;}
+        .m_box dt {margin-top:5px;}
+        #tool_box {height:155px; margin-top:20px;}
+        .sw_dot {margin-top:15px; margin-left:60px;}
+        #tb_left {width:525px; height:130px;float:left;padding-left:30px; padding-top:25px;background:#FFF;border-radius:5px; position:relative;}
+        .box_title {width:505px; border-bottom:#ebebeb solid 1px;height:40px;}
+        .box_title li{width:130px; float:left; color:#999; font-size:16px;height:40px; cursor:pointer;background:url(/img/ico_off.png) 0px 1px no-repeat;text-indent:28px;}
+
+        .box_title .hover {color:#003266;background:url(/img/ico_on.png) 0px 1px no-repeat;height:40px;}
+        .box_title li:hover {color:#003266;background:url(/img/ico_on.png) 0px 1px no-repeat;}
+        .learder_mail {position:absolute; right:15px; top:26px;}
+        .learder_mail a {color:#F00;}
+        .learder_mail a:hover {color:#c00;}
+        .learder_mail li {font-size:14px; float:left; width:90px; overflow:hidden; background:none; text-indent:0px;}
+        .learder_mail li:hover {background:none;}
+        .learder_mail span {font-family:"宋体"; font-size:12px; font-weight:bold; margin-left:4px;}
+        .box_content {margin-top:20px;}
+        #usrname {background:url(/img/usr_bg.png) left no-repeat;}
+        #passwd {background:url(/img/pwd_bg.png) left no-repeat;}
+        .sbt {height:40px; width:95px; background:#6699cc; color:#fff; border:#6699cc solid 1px;margin-left:10px; font-size:14px; cursor:pointer;border-radius:5px; font-family:"微软雅黑";}
+        .sbt:hover {background:#1f69b8;}
+
+        .tb_right {width:400px; height:155px; float:left;margin-left:25px;}
+        .tb_right a {color:#fff;}
+        .tb_right li {width:190px; float:left; overflow:hidden; background:#9CF;border-radius:5px; height:45px; line-height:45px; text-align:center;}
+        .tb_right #a a{background:#cf0a02;width:190px;height:45px; display:block;}
+        .tb_right #a a:hover {background:#a40000;color:#fff;}
+        .tb_right #b a{background:#3399ff;width:190px;height:45px; display:block;}
+        .tb_right #b a:hover {background:#0066cc;color:#fff;}
+        .tb_right #c a{background:#33cccc;width:190px;height:45px; display:block;}
+        .tb_right #c a:hover {background:#009999;color:#fff;}
+        .tb_right #d a{background:#669900;width:190px;height:45px; display:block;}
+        .tb_right #d a:hover {background:#336600;color:#fff;}
+        .tb_right #e a{background:#cc66ff;width:190px;height:45px; display:block;}
+        .tb_right #e a:hover {background:#663399;color:#fff;}
+        .tb_right #f a{background:#996633;width:190px;height:45px; display:block;}
+        .tb_right #f a:hover {background:#663300;color:#fff;}
+
+        .tb_right #b,.tb_right #d,.tb_right #f{margin-left:20px;}
+        .tb_right #c,.tb_right #d,.tb_right #e,.tb_right #f{margin-top:10px;}
+        #xiaoxun {text-align:center; background:#3b7abd; margin-top:20px;border-radius:5px;}
+
+        .footer {height:115px; background:#94bbe4;}
+        #copyright {background:#3b7abd;height:115px; color:#fff; line-height:25px;position:relative;}
+        .i_copy{background:#808080;height:85px; color:#fff; line-height:25px;}
+        #i_copy {background:#727272;height:85px; color:#fff; line-height:25px;position:relative;}
+        .i_ico_class {background:#808080;height:45px; color:#fff; line-height:25px;}
+        #i_copy span {font-family:Georgia, "Times New Roman", Times, serif; margin-left:5px; font-size:16px; margin-right:5px; letter-spacing:2px;color:#fff;}
+        #i_copy a {color:#fff;}
+        #i_copy a:hover {text-decoration:underline;}
+        #i_location{position:absolute; right:155px; top:35px;color:#fff;}
+        #i_cp_info{position:absolute;left:145px;top:35px;color:#fff;}
+
+        #i_ico {background:#727272;height:45px; color:#fff; line-height:25px;position:relative;}
+
+        #i_sydw{position:absolute; left:50px;top:-58px;color:#fff;}
+        #i_wa{position:absolute; left:145px;top:-15px;color:#fff;}
+        #i_wa img {position:absolute; left:175px; top:2px;}
+        #i_wa a {padding-right:40px; color:#fff;}
+        #i_wa a:hover {text-decoration:underline;}
+
+        #location {position:absolute; left:45px; top:50px;color:#fff;}
+        #cp_info {position:absolute; right:45px;top:50px;color:#fff;}
+        #location span {font-family:Georgia, "Times New Roman", Times, serif; margin-left:5px; font-size:16px; margin-right:5px; letter-spacing:2px;color:#fff;}
+        #cp_info span {font-family:Georgia, "Times New Roman", Times, serif;margin-left:5px;font-size:16px;margin-right:5px;letter-spacing:2px;color:#fff;}
+
+        .theme-popover-mask{z-index: 9998;position:fixed;top:0;left:0;width:100%;height:100%;background:url(/img/overlay.png);opacity:0.3;filter:alpha(opacity=30);display:none}
+        .theme-popbod{padding:15px 25px;}
+
+        .theme-popover-ann{z-index:9999;position:fixed;top:50%;left:50%;width:660px;height:380px;margin:-180px 0 0 -330px;border-radius:5px;border:solid 2px #3b7abd;background-color:#fff;display:none;box-shadow: 0 0 10px #94bbe4;}
+        .theme-popcls-ann{border-bottom:1px solid #ddd; background:#3b7abd;position: relative; letter-spacing:2px;text-align:center; line-height:70px; height:70px; font-size:20px; color:#fff;}
+        .theme-popcls-ann .close{color:#fff;font:normal 22px/22px simsun;width:50px; height:50px; position:absolute; right:0px; top:0px; background:url(/img/cls_bg.png) 0px 0px no-repeat; line-height:44px; text-indent:12px;}
+        .theme-popcls-ann .close:hover{color:#f5f5f5; text-decoration:none;}
+
+        .theme-popover-special{z-index:9999;position:fixed;top:50%;left:50%;width:660px;height:380px;margin:-180px 0 0 -330px;border-radius:5px;border:solid 2px #3b7abd;background-color:#fff;display:none;box-shadow: 0 0 10px #94bbe4;}
+        .theme-popcls-special{border-bottom:1px solid #ddd; background:#3b7abd;position: relative; letter-spacing:2px; text-align:center; line-height:70px; height:70px; font-size:20px; color:#fff;}
+        .theme-popcls-special .close{color:#fff;font:normal 22px/22px simsun;width:50px; height:50px; position:absolute; right:0px; top:0px; background:url(/img/cls_bg.png) 0px 0px no-repeat; line-height:44px; text-indent:12px;}
+        .theme-popcls-special .close:hover{color:#f5f5f5; text-decoration:none;}
+
+        .theme-popover-service{z-index:9999;position:fixed;top:50%;left:50%;width:660px;height:380px;margin:-180px 0 0 -330px;border-radius:5px;border:solid 2px #3b7abd;background-color:#fff;display:none;box-shadow: 0 0 10px #94bbe4;}
+        .theme-popcls-service{border-bottom:1px solid #ddd; background:#3b7abd;position: relative; letter-spacing:2px; text-align:center; line-height:70px; height:70px; font-size:20px; color:#fff;}
+        .theme-popcls-service .close{color:#fff;font:normal 22px/22px simsun;width:50px; height:50px; position:absolute; right:0px; top:0px; background:url(/img/cls_bg.png) 0px 0px no-repeat; line-height:44px; text-indent:12px;}
+        .theme-popcls-service .close:hover{color:#f5f5f5; text-decoration:none;}
+
+        #ann_content li {line-height:38px;height:38px; font-size:14px;}
+        #ann_content a {color:#033363;}
+        #ann_content span {font-size:12px; color:#999; margin-right:10px;}
+        #spe_content {margin-top:-15px;}
+        #spe_content li {width:180px; height:80px; float:left; margin-right:5px; margin-left:15px; margin-top:25px;}
+
+        #service_content {}
+        #service_content li {line-height:36px; height:36px; float:left; margin-left:15px; margin-right:15px; background:#94bbe4; padding:5px 15px 5px 15px;margin-top:25px; border-radius:5px;}
+        #service_content a {color:#fff;}
+        #service_content a:hover {text-decoration:none;}
+        #service_content li:hover {background:#3b7abd;}
+
+        #more_btn {text-align:center; font-size:16px; position:absolute; bottom:20px; left:250px;}
+        #more_btn a {color:#fff;}
+        #more_btn a:hover { text-decoration:none;}
+        #more_btn span {background:#4d8acb; display:block;cursor:pointer; padding:15px 30px 15px 30px; border-radius:5px;}
+        #more_btn span:hover {background:#3b7abd;}
+
+        /********* about begin *******/
+        .big_body {width:980px; margin:0 auto; border:none;}
+        .body_slide {width:240px; margin-top:20px;display:inline;}
+        .body_main {width:720px;background:#fff;margin-top:20px;display:inline; margin-left:20px;}
+
+        .title_pic_1 {width:980px; height:150px;background:url(/img/title_bg_1.jpg) no-repeat;border-radius:5px; position:relative;}
+        .title_pic_2 {width:980px; height:150px;background:url(/img/title_bg_2.jpg) no-repeat;border-radius:5px; position:relative;}
+        .title_pic_3 {width:980px; height:150px;background:url(/img/title_bg_3.jpg) no-repeat;border-radius:5px; position:relative;}
+        .title_pic_4 {width:980px; height:150px;background:url(/img/title_bg_4.jpg) no-repeat;border-radius:5px; position:relative;}
+        .title_pic_5 {width:980px; height:150px;background:url(/img/title_bg_5.jpg) no-repeat;border-radius:5px; position:relative;}
+        .title_pic_6 {width:980px; height:150px;background:url(/img/title_bg_6.jpg) no-repeat;border-radius:5px; position:relative;}
+
+        .title_pic span {position:absolute; bottom:20px; right:30px; font-size:20px; color:#fff;letter-spacing:1px;}
+
+        .slide_title {font-size:18px; background:#99cc00; text-align:center; line-height:72px; height:72px; color:#fff;}
+        #s_intr a {color:#369; width:240px; height:70px; line-height:70px; display:block;}
+        #s_intr a:hover {text-decoration:none;color:#fff;}
+        #s_intr #fcs a{background:#3b7abd; border-top:#d8d8d8 solid 1px;color:#fff;}
+        #s_intr li {line-height:62px;font-size:16px; text-align:center; background:#e7e7e7; border-top:#dddddd solid 1px; cursor:pointer;}
+        #s_intr li:hover {background:#94bbe4; color:#fff;border-top:#d8d8d8 solid 1px;}
+        #s_intr li:hover a{color:#fff;}
+        #s_intr #last {background:#d3d3d3; height:10px; font-size:1px; line-height:10px;}
+
+        .postion {background:#f9f9fc; line-height:42px; padding:5px 0px 5px 20px; font-size:12px; border-bottom:#ebebeb solid 1px;}
+        .postion a {font-weight:bold; color:#666;}
+        .postion span {font-family:"宋体"; font-size:11px; margin-left:5px; margin-right:5px;}
+        .body_content {padding:10px 30px 30px 40px; color:#333; font-size:16px;}
+        .body_content p {margin-top:20px; line-height:36px; text-indent:2em;}
+        .author {float:right; font-size:12px; margin-top:30px; padding-bottom:40px; border-top:#ccc solid 1px; padding-top:15px; color:#333;}
+        .content_img {padding:20px 40px 20px 20px;margin-top:10px;}
+        .content_img span {background:#ededed;display:block; width:320px; text-align:center; height:42px; line-height:42px; color:#666; font-size:12px;}
+
+        .leader_content {padding:10px 30px 30px 40px; color:#333; font-size:16px;}
+
+        .body_content dl {border:#dff0ff solid 1px;background:#f4faff; border-bottom:none; width:560px; position:relative; margin-left:45px;}
+        .body_content #last{border-bottom:#dff0ff solid 1px;}
+        .body_content #fst{ margin-top:40px;}
+        .body_content a {color:#000;}
+        .body_content a:hover {color:#f00;}
+        .body_content dt {float:left; width:250px; font-size:16px;vertical-align:middle;position:static;}
+        .body_content dd {float:left; margin-left:40px; padding:20px;font-size:14px;border-left:#dff0ff solid 1px; }
+        .body_content dd a {color:#036;}
+        .body_content dd li {line-height:42px; height:42px;border-top:none; border-right:none;}
+        .body_content .a-z { position:absolute; width:45px; height:45px; display:block; background:#ffcc99; left:-46px; top:-1px; color:#fff; line-height:45px; font-family:Tahoma, Geneva, sans-serif; font-size:22px; text-align:center;}
+        .body_content .a-z a {color:#fff;}
+        .body_content .back {position:absolute; right:-40px; bottom:0px; font-size:14px;}
+        .body_content .back a {color:#999;}
+
+        .oph dt {float:left; width:179px; font-size:14px;vertical-align:middle;position:static; text-align:center; line-height:22px;}
+
+        .az {margin-top:16px; text-align:center;}
+        .az a {padding:10px 15px 10px 15px; border:#D7F2FF solid 1px; margin-right:12px; line-height:60px; white-space:nowrap; font-size:12px;}
+        .az a:hover {background:#09C; color:#fff;}
+        .oph dd {padding:0; margin:0;}
+        .oph_content {margin-top:20px; text-align:center;}
+
+        .oph_content dl {border:#dff0ff solid 1px;background:#f4faff; border-bottom:none; width:820px; position:relative; margin-left:45px; border-top:#d7ecff solid 5px;}
+        .oph_title {height:36px; line-height:36px; width:822px; margin-left:45px; font-size:16px; background:#0080C0; color:#fff;z-index:9999; top:631px;}
+        .oph_title li {float:left; text-align:center;}
+        .oph_title #part_title {width:170px; border-right:#C4ECFF solid 1px;}
+        .oph_title #part_bm {width:190px; border-right:#C4ECFF solid 1px;}
+        .oph_title #part_ch {width:260px; border-right:#C4ECFF solid 1px;}
+        .oph_title #part_dh {width:199px;}
+        .curBox {top:0px; width:822px; position:fixed;_position: absolute;}
+
+        .oph dt {width:150px; padding-left:10px; padding-right:10px;}
+        .oph ul {cursor:pointer;border-bottom:#dff0ff solid 1px;}
+        .oph ul:hover li{background:#09C; color:#fff;}
+        .oph ul li {float:left; border-right:#C4ECFF solid 1px;}
+        .oph #d_p {float:left; font-size:12px;}
+        .oph #bm {width:189px; text-align:center;}
+        .oph #bg {width:259px; text-align:center;}
+        .oph #dh {width:199px; text-align:center;border-right:none;}
+
+        .info {font-size:12px; background:#FFFFCA;width:780px; border:#FDEBB5 solid 1px;margin-left:45px;_margin-left:65px; line-height:32px; margin-top:20px; padding:10px 20px 10px 20px; color:#000;}
+        .map_title {background:#fff9e6;border:#fff1c8 solid 1px; border-left:none; border-right:none; margin-top:25px; line-height:50px; height:50px; padding-left:20px;}
+        .map_content {padding:20px; font-size:14px; padding-left:0px; padding-top:15px;}
+        .map_content a {color:#666; padding:8px 15px 8px 15px;}
+        .map_content a:hover {background:#6cc; color:#fff;padding:8px 15px 8px 15px;}
+        .map_content li {float:left; margin-right:15px; white-space:nowrap;line-height:40px;height:40px;}
+
+        #cwc,#rsc,#xdjy{padding-top:110px;}
+        #dwxcb {padding-top:90px;}
+        #zzb,#db {padding-top:190px;}
+        #dwxgb {padding-top:220px;}
+        #hqglc {padding-top:260px;}
+        #jwc {padding-top:280px;}
+        #hqjt {padding-top:520px;}
+        #bwc {padding-top:360px;}
+        #gh {padding-top:140px;}
+        #ggw,#ghjsc,#jyxy{padding-top:30px;}
+        #jgdw {padding-top:10px;}
+        #jxjyxy,#sys {padding-top:150px;}
+        #kjc {padding-top:100px;}
+        #ltx {padding-top:160px;}
+        #syzy {padding-top:50px;}
+        #tsg, #xbbjb, #sjc, #jwb{padding-top:70px;}
+        #tw,#xkb {padding-top:50px;}
+        #xyh {padding-top:10px;}
+        #yhcy {padding-top:30px;}
+        #zjc {padding-top:135px;}
+        #chxy {padding-top:155px;}
+        #cmxy {padding-top:175px;}
+        #dwcl {padding-top:10px;}
+        #pfxy {padding-top:135px;}
+        #fxcszx,#gj {padding-top:55px;}
+        #hzh li{height:70px; line-height:70px;}
+        #jsjxy{padding-top:195px;}
+        #pjyxy,#smkxxy {padding-top:220px;}
+        #lsxy,#sxxy{padding-top:140px;}
+        #sswzn {padding-top:40px;}
+        #shzh {padding-top:55px;}
+        #szxqy {padding-top:15px;font-size:12px;}
+        #szxq li{height:70px; line-height:70px;}
+        #tyxy,#wxy,#jgxy,#hxhgxy{padding-top:155px;}
+        #wtxy {padding-top:178px;}
+        #wgyxy,#wlxy,#msxy{padding-top:180px;}
+        #yyxy,#zzxy {padding-top:195px;}
+
+        #smkx {height:220px;line-height:220px; padding-left:40px;}
+        #wl {height:120px;line-height:120px; padding-left:40px;}
+        #hxhg {height:240px;line-height:240px; padding-left:40px;}
+        #mks, #ch, #jj, #jsj, #jsj, #jsj, #jsj, #wt, #sx, #wx, #wgy, #jy, #zz, #ls, #fxy, #cm, #ms, #ty, #yy {height:85px; line-height:85px; padding-left:40px;}
+
+        .bra_title {font-size:20px; border-bottom:#66cccc solid 2px; padding-bottom:20px;_padding-bottom:19px; margin-top:20px;}
+        .bra_content {margin-left:20px; margin-top:25px;}
+        .bra_content li {line-height:26px; height:26px; float:left; margin-right:40px; width:250px; margin-bottom:20px; background:url(/img/gray_dot.jpg) 0 4px no-repeat; text-indent:18px; font-size:14px;}
+
+        .bra_title span {font-size:14px;background:#eaeaea; padding:17px 20px 17px 20px; cursor:pointer;}
+        .bra_title span a {color:#999;}
+        .bra_title span a:hover {color:#666;}
+        .bra_title span:hover {background:#99cccc;}
+        .bra_title span:hover a {color:#fff;}
+        .bra_title #current {background:#66cccc;}
+        .bra_title #current a {color:#fff;}
+        .b_span {margin-left:50px;}
+
+        .leaders_content {color:#333;}
+        .leaders_content #intr_box {border:none;border-top:#f2f2f2 solid 4px; padding-bottom:15px;margin-top:20px; padding-top:20px;}
+        .leaders_content #intr_box dd {float:left; border:none;}
+        .leaders_content #intr_box #title {width:180px; background:#e7e7e7; text-align:center; color:#000; height:50px; line-height:50px; font-size:12px;}
+        .leaders_content #intr_box .left {width:180px;}
+        .leaders_content #intr_box .left #photo {margin-top:16px;}
+        .leaders_content #intr_box .right {width:420px; padding:0px 0px 0px 50px; font-size:14px;}
+        .leaders_content #intr_box .right li {margin-top:10px; text-indent:2em; line-height:26px;}
+
+        /********* about end *******/
+
+        .leader_main {width:980px;background:#fff;margin-top:20px;}
+        .scenery_content img {width:380px; height:245px; }
+        .scenery_content ul {width:380px; float:left;text-align:center; margin-top:30px; margin-left:50px;}
+        .scenery_content span {width:380px; text-align:center; display:block; background:#EAEAEA;height:60px; line-height:60px;}
+
+
+
+    </style>
+
+
+</head>
+<body>
+<div id="top">
+    <div class="w_980" id="top_body">
+        <div class="fll">
+
+            <a href="" title="微博" target="_blank">淮师微博</a>
+            <a href="" title="微信" target="_blank">微信</a>
+            <a href="" title="文明" target="_blank">江苏文明单位在线</a>
+        </div>
+        <div class="flr">
+            <a href="" title="信息门户" target="_blank">信息门户</a>
+            <a href="" title="图书馆" target="_blank">图书馆</a>
+            <a href="" title="English Version" target="_blank">ENGLISH</a>
+        </div>
+    </div><!-- top_body end -->
+</div><!-- top end -->
+<div class="clear"></div>
+<div class="w_980" id="banner">
+    <div class="fll" id="logo"><a href="" title="淮阴师范学院"><img src="/img/logo.png" alt="淮阴师范学院" title="淮阴师范学院" /></a></div>
+    <div class="flr">
+        <form action="" method="post" name="searchform" target="_blank" id="searchform">
+            <div id="stxt"><input  type="text" name="keyboard" id="keyboard" class="srchbox" id="srchbox" width="20" /></div>
+            <input type="hidden" name="show" value="title" />
+            <div id="sbtn"><input  type="submit" id="submit" class="srchbtn" id="srchbtn" value=""/></div>
+        </form>
+    </div>
+</div><!-- banner end -->
+<div id="menu">
+    <div class="w_980">
+        <ul class="menu_body w_980" id="menu_body">
+            <li><a>学校概况</a><span id="more"></span>
+                <ul class="subnav">
+                    <li><a href="" title="校情简介">校情简介</a></li>
+                    <li><a href="" title="校史沿革">校史沿革</a></li>
+                    <li><a href="" title="学校领导">学校领导</a></li>
+                    <li><a href="" title="院系设置">院系设置</a></li>
+                    <li><a href="" title="机构部门">机构设置</a></li>
+                    <li><a href="" target="_blank">信息公开</a></li>
+                    <li><a href="" title="办公电话">办公电话</a></li>
+                    <li><a href="" title="校园风景">校园风景</a></li>
+
+                </ul></li>
+            <li><a>招生就业</a><span id="more"></span>
+                <ul class="subnav">
+                    <li><a href="" target="_blank">本科生招生</a></li>
+                    <li><a href="" target="_blank">研究生招生</a></li>
+                    <li><a href="" target="_blank">继续教育招生</a></li>
+                    <li><a href="" target="_blank">留学生招生</a></li>
+                    <li><a href="" target="_blank">就业网</a></li>
+                    <li><a href="h" target="_blank">创业网</a></li>
+
+                </ul></li>
+            <li><a>教育教学</a><span id="more"></span>
+                <ul class="subnav">
+                    <li><a href="" target="_blank">本科生教育</a></li>
+                    <li><a href="" target="_blank">研究生教育</a></li>
+                    <li><a href="" target="_blank">继续教育</a></li>
+                    <li><a href="" target="_blank">留学生教育</a></li>
+                    <li><a href="" target="_blank">教师教学发展中心</a></li>
+                    <li><a href="" target="_blank">本科教学审核评估</a></li>
+                </ul></li>
+            <li><a>科学研究</a><span id="more"></span>
+                <ul class="subnav">
+                    <li><a href="" target="_blank">科研信息网</a></li>
+                    <li><a href="" target="_blank">技术转移中心</a></li>
+                    <li><a href="" target="_blank">学科办</a></li>
+                    <li><a href="">学报</a></li>
+                    <li><a href="" target="_blank">周恩来研究</a></li>
+                </ul></li>
+            <li><a>师资队伍</a><span id="more"></span>
+                <ul class="subnav">
+                    <li><a href="" target="_blank">人事处</a></li>
+                    <li><a href="" target="_blank">人才招聘</a></li>
+                    <li><a href="" target="_blank">人事管理系统</a></li>
+                </ul></li>
+
+            <li><a>校园文化</a><span id="more"></span>
+                <ul class="subnav">
+                    <li><a href="" target="_blank">淮师新闻网</a></li>
+                    <li><a href="" target="_blank">学校微博</a></li>
+                    <li><a href="" target="_blank">崇高网</a></li>
+                    <li><a href="" target="_blank">翔宇网</a></li>
+                    <li><a href="" target="_blank">工会</a></li>
+                    <li><a href="" target="_blank">艺术教育</a></li>
+                    <li><a href="" target="_blank">关工委</a></li>
+                    <li><a href="" target="_blank">语言文字网</a></li>
+
+                </ul></li>
+            <li><a>合作交流</a><span id="more"></span>
+                <ul class="subnav">
+                    <li><a href="" target="_blank">国际合作与交流处</a></li>
+                    <li><a href="" target="_blank">国际教育学院</a></li>
+                    <li><a href="" target="_blank">港澳台事务办公室</a></li>
+                </ul></li>
+            <li><a>快速服务</a><span id="more"></span>
+                <ul class="subnav">
+                    <li><a href="" target="_blank">作息时间</a></li>
+                    <li><a href="" target="_blank">节假日安排</a></li>
+                    <li><a href="" target="_blank">校历</a></li>
+                    <li><a href="" target="_blank">VPN远程接入</a></li>
+                    <li><a href="" target="_blank">网上自助缴费平台</a></li>
+                    <li><a href="" target="_blank">网络认证自助服务</a></li>
+                    <li><a href="" target="_blank">校园网盘</a></li>
+                    <li><a href="" target="_blank">常用网站导航</a></li>
+
+
+                </ul>
+    </div>
+</div><!-- menu end -->
+<div class="main_wrap">
+    <div class="w_980 f_pic" id="iview2">
+
+        <a href="" class="iviewdis" title="" target="_blank" data-iview:image="/img/show1.jpg"><span class="iview-caption" data-x="0" data-y="300" data-transition="fade" data-height="15">淮阴师范学院发展论坛暨建校60周年庆祝大会举行</span></a>
+
+
+
+
+
+        <a href="" class="iviewdis" title="" target="_blank" data-iview:image="/img/show2.jpg"><span class="iview-caption" data-x="0" data-y="300" data-transition="fade" data-height="15">张璨老师荣获省公共艺术课微课大赛一等奖</span></a>
+
+
+
+
+
+        <a href="" class="iviewdis" title="" target="_blank" data-iview:image="/img/show3.jpg"><span class="iview-caption" data-x="0" data-y="300" data-transition="fade" data-height="15">【光明日报】淮阴师范学院：把优质教育送到农村</span></a>
+
+
+
+
+
+        <a href="" class="iviewdis" title="" target="_blank" data-iview:image="/img/show4.jpg"><span class="iview-caption" data-x="0" data-y="300" data-transition="fade" data-height="15">热烈庆祝淮阴师范学院建校60周年</span></a>
+
+
+
+
+
+        <a href="" class="iviewdis" title="" target="_blank" data-iview:image="/img/show5.jpg"><span class="iview-caption" data-x="0" data-y="300" data-transition="fade" data-height="15">热烈庆祝中华人民共和国成立69周年</span></a>
+
+
+
+
+
+        <a href="" class="iviewdis" title="" target="_blank" data-iview:image="/img/show6.jpg"><span class="iview-caption" data-x="0" data-y="300" data-transition="fade" data-height="15">祝全校师生中秋节快乐</span></a>
+
+
+
+
+
+        <a href="" class="iviewdis" title="" target="_blank" data-iview:image="/img/show7.jpg"><span class="iview-caption" data-x="0" data-y="300" data-transition="fade" data-height="15">热烈庆祝第34个教师节</span></a>
+
+
+
+
+
+        <a href="" class="iviewdis" title="" target="_blank" data-iview:image="/img/show8.jpg"><span class="iview-caption" data-x="0" data-y="300" data-transition="fade" data-height="15">欢迎新生点击访问淮师迎新网完成网上报到！</span></a>
+
+
+
+
+    </div>
+    <!-- f_pic end -->
+    <div class="w_980" id="con_box">
+        <script>
+            $(document).ready(function(){
+                $(".tabCons").each(function(i,item){
+                    var li=$(".tabMenus li",$(this));
+                    var div=$("div",$(this));
+                    var l=li.size();
+                    var n= 0;
+                    li.eq(0).addClass("current");
+                    div.eq(0).slideDown(600);
+                    function chge(){
+                        n++;
+                        if(n>=l)n=0;
+                        li.eq(n).addClass("current").siblings().removeClass();
+                        div.hide().eq(n).slideDown(600);
+                    }
+                    //增加经过停止切换，
+                    var setInt=setInterval(chge,8000);
+                    $(this).hover(function(){
+                        clearInterval(setInt);
+                    },function(){
+                        setInt=setInterval(chge,8000);
+                    });
+                    //增加鼠标点击选择功能
+                    $(".tabMenus li",$(this)).click(function(){
+                        n=$(this).index();
+                        li.eq(n).addClass("current").siblings().removeClass();
+                        div.hide().eq(n).slideDown(600);
+                    })
+                })
+            })
+        </script>
+
+
+        <div id="c_left">
+
+            <div class="n_title"><a href="" title="媒体淮师" target="_blank">媒体淮师</a><span><a href="http://news.hytc.edu.cn/news/mths/" title="媒体淮师" target="_blank">更多</a></span></div>
+            <!-- 媒体淮师 开始 -->
+            <div class="tabCons">
+                <dl class="m_box"><dd><a href="" title="【江苏教育发布】光影校园" target="_blank">【江苏教育发布】光影校园</a></dd></dl><dl class="m_box"><dd><a href="http://news.hytc.edu.cn/news/mths/2018-10-18/34499.html" title="【新华网】淮阴师范学院发展论坛暨建校60周年庆祝大会举行" target="_blank">【新华网】淮阴师范学院发展论坛暨建校60周年庆祝大会举行</a></dd></dl><dl class="m_box"><dd><a href="http://news.hytc.edu.cn/news/mths/2018-10-18/34473.html" title="【新华日报】淮阴师范学院喜庆六十华诞" target="_blank">【新华日报】淮阴师范学院喜庆六十华诞</a></dd></dl></div>
+            <!-- 媒体淮师 结束 -->
+        </div><!-- c_left end -->
+
+        <div id="c_center">
+
+            <div class="n_title" id="zhxw"><span><a href="" title="综合新闻" target="_blank">更多</a></span></div>
+            <!-- 综合新闻 开始 -->
+
+            <div class="tabCons">
+                <ul class="tabMenus" id="zhxw_dot">
+                    <li>综合新闻</li>
+                    <li>校园动态</li>
+                </ul>
+                <ul class="tab_box">
+                    <div class="tab_con" id="act_list">
+                        <dl class="news_box">
+                            <dt><a href="" title="东吴大学校长潘维大访问淮师" target="_blank">东吴大学校长潘维大访问淮师</a></dt>
+                            <dl class="clear"></dl>
+                        </dl><dl class="news_box">
+                        <dt><a href="" title="淮师开展师范专业（中学文科）二级认证诊断工作" target="_blank">淮师开展师范专业（中学文科）二级认证诊断工作</a></dt>
+                        <dl class="clear"></dl>
+                    </dl><dl class="news_box">
+                        <dt><a href="" title="淮师举行形势与政策课集体备课会" target="_blank">淮师举行形势与政策课集体备课会</a></dt>
+                        <dl class="clear"></dl>
+                    </dl><dl class="news_box">
+                        <dt><a href="" title="淮师举办招标采购业务专项培训会" target="_blank">淮师举办招标采购业务专项培训会</a></dt>
+                        <dl class="clear"></dl>
+                    </dl><dl class="news_box">
+                        <dt><a href="" title="淮师获2018年全国BIM应用技能比赛一等奖" target="_blank">淮师获2018年全国BIM应用技能比赛一等奖</a></dt>
+                        <dl class="clear"></dl>
+                    </dl><dl class="news_box">
+                        <dt><a href="" title="淮师教师在全国高校教师教学创新大赛中获奖" target="_blank">淮师教师在全国高校教师教学创新大赛中获奖</a></dt>
+                        <dl class="clear"></dl>
+                    </dl></div>
+                    <div class="tab_con" id="act_list">
+                        <dl class="news_box">
+                            <dt><a href="" title="淮师一项目获全国教育信息技术研究课题立项" target="_blank">淮师一项目获全国教育信息技术研究课题立项</a></dt>
+                            <dl class="clear"></dl>
+                        </dl><dl class="news_box">
+                        <dt><a href="" title="民革淮阴师范学院支部举办第八期淮上雅集活动" target="_blank">民革淮阴师范学院支部举办第八期淮上雅集活动</a></dt>
+                        <dl class="clear"></dl>
+                    </dl><dl class="news_box">
+                        <dt><a href="" title="淮师学生聆听劳模精神宣讲，感悟新时代精神" target="_blank">淮师学生聆听劳模精神宣讲，感悟新时代精神</a></dt>
+                        <dl class="clear"></dl>
+                    </dl><dl class="news_box">
+                        <dt><a href="" title="“就业创业在江苏”引才推介会在淮师举行" target="_blank">“就业创业在江苏”引才推介会在淮师举行</a></dt>
+                        <dl class="clear"></dl>
+                    </dl><dl class="news_box">
+                        <dt><a href="" title="淮师“团聚时光”聚焦团宣媒体" target="_blank">淮师“团聚时光”聚焦团宣媒体</a></dt>
+                        <dl class="clear"></dl>
+                    </dl><dl class="news_box">
+                        <dt><a href="" title="淮师工会组织2018年教职工钓鱼比赛" target="_blank">淮师工会组织2018年教职工钓鱼比赛</a></dt>
+                        <dl class="clear"></dl>
+                    </dl></div>
+                </ul>
+
+            </div>
+            <!-- 综合新闻 结束 -->
+        </div><!-- c_center end -->
+
+        <div id="c_right">
+            <div class="hdtz_title">
+                <span><a href="" title="活动预告" target="_blank">更多</a></span></div>
+            <div class="tabCons">
+                <ul class="tabMenus" id="jzyg_dot">
+                    <li>活动预告</li>
+                    <li>通知公告</li>
+                </ul>
+                <ul class="tab_box">
+                    <!-- 讲座预告 开始 -->
+                    <div class="tab_con" id="act_list">
+                        <dl class="r_content">
+                            <dl class="date_box">
+                                <dt id="m">10月</dt>
+                                <dd id="d">26</dd>
+                            </dl><!-- date_box end --><dl class="r_li"><dt id="t"><a href="" title="" target="_blank">【校庆系列报告】晚明时期的时尚文化</a></dt>	</dl><!-- r_li end --><dl class="clear"></dl></dl><!-- r_content end -->
+                        <dl class="r_content">
+                            <dl class="date_box">
+                                <dt id="m">10月</dt>
+                                <dd id="d">27</dd>
+                            </dl><!-- date_box end --><dl class="r_li"><dt id="t"><a href="" title="" target="_blank">【活动预告】2018随机动力系统最新进展国际研讨会</a></dt>	</dl><!-- r_li end --><dl class="clear"></dl></dl><!-- r_content end -->
+                        <dl class="r_content">
+                            <dl class="date_box">
+                                <dt id="m">10月</dt>
+                                <dd id="d">27</dd>
+                            </dl><!-- date_box end --><dl class="r_li"><dt id="t"><a href="" title="" target="_blank">【名师论坛】第6期：优秀教师的成长导引与发展路径</a></dt>	</dl><!-- r_li end --><dl class="clear"></dl></dl><!-- r_content end -->
+                    </div>
+                    <div class="tab_con" id="ann_list">
+                        <li><a href="" title="江苏省哲学社会科学界第十二届学术大会教育与社会学专场征文公告" target="_blank">江苏省哲学社会科学界第十二届学术</a></li><li><a href="http://news.hytc.edu.cn/xxfw/tz/2018-10-17/34462.html" title="网络DHCP系统采购项目磋商公告" target="_blank">网络DHCP系统采购项目磋商公告</a></li><li><a href="http://news.hytc.edu.cn/xxfw/tz/2018-10-17/34455.html" title="网络DNS系统采购项目磋商公告" target="_blank">网络DNS系统采购项目磋商公告</a></li><li><a href="http://news.hytc.edu.cn/xxfw/tz/2018-10-17/34453.html" title="网络入侵防护系统采购项目磋商公告" target="_blank">网络入侵防护系统采购项目磋商公告</a></li><li><a href="http://news.hytc.edu.cn/xxfw/tz/2018-10-17/34445.html" title="关于2017年下半年申请设备报废的结果公示" target="_blank">关于2017年下半年申请设备报废的结</a></li><li><a href="http://news.hytc.edu.cn/xxfw/tz/2018-10-15/34412.html" title="校庆系列活动网络直播菜单" target="_blank">校庆系列活动网络直播菜单</a></li></div>
+                </ul>
+                <!-- 讲座预告 结束 -->
+            </div><!-- 讲座预告 结束 -->
+        </div><!-- c_right end -->
+        <div class="clear"></div>
+    </div><!-- con_box end -->
+    <div class="w_980" id="tool_box">
+        <script>
+            <!--
+            /*第一种形式 第二种形式 更换显示样式*/
+            function setTab(name,cursel,n){
+                for(i=1;i<=n;i++){
+                    var menu=document.getElementById(name+i);
+                    var con=document.getElementById("con_"+name+"_"+i);
+                    menu.className=i==cursel?"hover":"";
+                    con.style.display=i==cursel?"block":"none";
+                }
+            }
+            //-->
+        </script>
+        <div id="tb_left">
+            <div class="box_title">
+                <li id="nine1" class="hover" onclick="setTab('nine',1,2)">学校邮箱</li>
+                <li id="nine2" onclick="javascript:window.open('')">电子办公</li>
+            </div>
+            <div class="learder_mail">
+                <li><a href="">书记信箱<span>></span></a></li>
+                <li><a href="">校长信箱<span>></span></a></li></div>
+            <div class="clear"></div>
+
+            <div class="box_content" id="con_nine_1">
+                <style>
+                    .bizmail_loginpanel input.text{font-size:12px;width:100px;height:35px;line-height:35px;margin:0 2px; padding-left:25px;border:#ccc solid 2px; color:#999;border-radius:5px;}
+                    .bizmail_loginpanel .bizmail_column{height:40px;}
+                    .bizmail_loginpanel .bizmail_column .bizmail_inputArea{float:left;width:240px;}
+                    .bizmail_loginpanel .bizmail_SubmitArea{margin-left:30px;clear:both;}
+                    .bizmail_loginpanel .bizmail_SubmitArea a{font-size:12px;margin-left:5px;}
+                    .bizmail_loginpanel select{width:100px;height:38px;margin:0 2px;border:#ccc solid 2px; color:#999;border-radius:5px;}
+                </style>
+                <script type="text/javascript" src="outerlogin.js" charset="gb18030"></script>
+                <script type="text/javascript">
+                    writeLoginPanel({domainlist:"hytc.edu.cn;stu.hytc.edu.cn", mode:"horizontal"});
+                </script>
+                <div id="divLoginpanelHor" class="bizmail_loginpanel">
+                    <div class="bizmail_LoginBox">
+                        <form name="form1" action="https://exmail.qq.com/cgi-bin/login" target="_blank" method="post" onsubmit="return checkInput()">
+                            <input name="firstlogin" value="false" type="hidden">
+                            <input name="errtemplate" value="dm_loginpage" type="hidden">
+                            <input name="aliastype" value="other" type="hidden">
+                            <input name="dmtype" value="bizmail" type="hidden">
+                            <input name="p" value="" type="hidden">
+                            <input name="uin" class="text" id="usrname" value="" type="text">
+                            &nbsp;@&nbsp;
+                            <select name="domain">
+                                <option value="hytc.edu.cn">hytc.edu.cn</option>
+                                <option value="stu.hytc.edu.cn">stu.hytc.edu.cn</option>
+                            </select>&nbsp;
+                            <input id="passwd" name="pwd" class="text" value="" type="password">
+                            <input class="sbt" name="" value="登录" type="submit">
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+        </div><!-- tb_left end -->
+
+        <div class="tb_right">
+            <li id="a"><a href="" title="校庆直播回放" target="_blank">校庆直播回放</a></li>
+            <li id="b"><a href="" title="校庆专题片——走向崇高" target="_blank">校庆专题片——走向崇高</a></li>
+            <li id="c"><a href="" title="文明创建应知应会" target="_blank">文明创建应知应会</a></li>
+            <li id="d"><a href="" title="电子橱窗" target="_blank">电子橱窗</a></li>
+            <li id="e"><a href="" title="大学生安全知识竞赛" target="_blank">大学生安全知识竞赛</a></li>
+            <li id="f"><a href="" title="建校60周年专题网站" target="_blank">建校60周年专题网站</a></li>
+            <div class="clear"></div>
+        </div>
+
+        <div class="clear"></div>
+    </div><!-- tool_box end -->
+
+    <div class="w_980" id="xiaoxun"><img src="/img/xiaoxun.png" alt="校训" title="校训" /></div>
+</div><!-- main_wrap end -->
+
+
+<div class="i_copy">
+    <div class="w_980" id="i_copy">
+        <div id="i_location">校址：江苏省淮安市长江西路<span>111</span>号　邮编：<span>223300</span></div>
+        <div id="i_cp_info">版权所有 &copy; 淮阴师范学院 <span>2014-2017</span> </div>
+    </div>
+</div>
+
+<div class="i_ico_class">
+    <div class="w_980" id="i_ico">
+
+        <div id="i_sydw">
+            <script type="text/javascript">document.write(unescape("%3Cspan id='_ideConac' %3E%3C/span%3E%3Cscript   src='http://dcs.conac.cn/js/11/000/0000/40686630/CA110000000406866300005.js' type='text/javascript'%3E%3C/script%3E"));</script>
+        </div>
+
+        <div id="i_wa">
+            <a href="" title="工业和信息化部ICP/IP地址/域名信息备案管理系统" target="_blank">苏ICP备：05071367号-1</a>
+            <a href="" target="_blank"><img src="/img/wa_ico.png">苏公网安备32080202000172号</a></div>
+
+    </div>
+</div>
+
+</body>
+</html>                                          
+
+
+

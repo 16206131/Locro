@@ -1,0 +1,17 @@
+<component name="ArtifactManager">
+  <artifact type="war" build-on-make="true" name="hh">
+    <output-path>$PROJECT_DIR$/out/artifacts/hh</output-path>
+    <root id="archive" name="hh.war">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="BBC" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: javax.servlet.jsp.jstl:jstl:1.2" />
+          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.46" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="BBC/web/Web" />
+    </root>
+  </artifact>
+</component>
